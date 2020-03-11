@@ -1,0 +1,97 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    text.txt                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ibotnaru <ibotnaru@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/07 11:16:14 by ibotnaru          #+#    #+#              #
+#    Updated: 2020/02/10 18:15:29 by ibotnaru         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+How ls works?
+https://gist.github.com/amitsaha/8169242
+
+We have to handle all the file types.
+
+https://linuxconfig.org/identifying-file-types-in-linux
+
+7 different file types of Linux OS:
+
+"ls" command will show the file type as an encoded symbol
+found as the first character of the file permission part
+
+- : regular file
+d : directory
+c : character device file
+b : block device file
+s : local socket file
+p : named pipe
+l : symbolic link
+
+Character and block device files allow users and programs
+to communicate with hardware peripheral devices. For example:
+crw------- 1 root root 10, 165 Jan  4 10:13 /dev/vmmon
+
+Character and block device files ussualy are placed in /dev directory (dev means "device")
+
+File permissions:
+Every file belongs to someone, it was created by someone, by any user that has account on that computer
+
+Files can be readen, written or executable an any kind of cmbinations of it
+
+read - read the data inside of the file or display it
+write - write inside, modify, save the modofocations or delete a file
+execute - run the file as program
+
+Directories have to be executable if you want to get into them and create files or do anything
+with files within a directory.
+A directory can be readable - it eans you can see it's there, but if it's not executable you cannot
+get into it and manipulate with files inside.
+
+Links:
+https://www.giannistsakiris.com/2011/04/15/counting-and-listing-hard-links-on-linux/
+
+Groups,  size, date, time...
+
+Allowed functions:
+
+https://www.youtube.com/watch?v=vbAfIGR_5XM
+
+opendir(): http://man7.org/linux/man-pages/man3/opendir.3.html
+readdir()
+clodedir()
+
+Easy steps to follow on this project:
+1. Learn ho to open read and close a directory.
+2. Display the content of dyrectory
+3. Before dysplaing it we need to sort the contetn of it depending
+on the flags (or the absence of flags)
+4. For that we need to pars the flags first. Special case is -R flag.
+5. Handling the errors.
+6. Add some colors and other bonuses.
+7. Check for leaks, bus errors or segfaults. 
+
+Step 1:
+    I created an array of strings which will hold the name of the files and directories
+    (the comtent) of the current directory (we dont have any path yet.) which is empty
+    fom the beggining.
+    We dont know the size also.
+Step 2:
+    I am getting this data (the content of directory) by using a while loop and opendir()
+    and readdir() functions and variable sd.
+Step 3:
+    In this while loop we fill our array of stings where every string is gonna be the data
+    (names of files and directories) just readed by readdir() function.
+    Here we also have an counter which will hold the total number of files and directories
+    in current directory (easier to say the "content").
+Step 4:
+    I need to sort this array in alphabetical order. I created a function arrstring_sort()
+    for that.
+
+    https://www.geeksforgeeks.org/program-to-sort-an-array-of-strings-using-selection-sort/1
+
+Step 5:
+    After the array is sorted, i am parsing the flags.
+    Depending on the flag I wil print differnt content.
